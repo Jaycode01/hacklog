@@ -1,5 +1,14 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "GlassAntiqua";
+  src: url("../../public/GlassAntiqua-Regular.woff2");
+}
+
+* {
+  font-family: "GlassAntiqua";
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
