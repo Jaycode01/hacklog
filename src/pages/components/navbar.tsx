@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Logo from "../../../public/images/hacklog-logo.png";
+import { ChevronRight } from "lucide-react";
 
 export default function Navbar() {
   const router = useRouter();
@@ -16,9 +17,10 @@ export default function Navbar() {
         <button
           type="button"
           onClick={() => router.push("/get-started")}
-          className="text-white bg-blue-300 px-7 py-3.5 text-[20px] rounded cursor-pointer"
+          className="text-white bg-blue-300 px-7 py-3.5 text-[20px] rounded cursor-pointer flex flex-row items-center gap-1.5"
         >
           Get Started
+          <ChevronRight />
         </button>
       </div>
     </div>
