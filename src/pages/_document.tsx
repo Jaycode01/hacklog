@@ -8,6 +8,7 @@ export default function Document() {
         href="../../public/images/hacklog-logo.png"
         type="image/x-icon"
       />
+      <title>Hacklog - Work with accountability.</title>
       <Head />
       <body className="antialiased">
         <Main />
