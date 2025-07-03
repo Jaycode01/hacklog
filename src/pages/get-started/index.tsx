@@ -15,6 +15,10 @@ import { db } from "@/firebase/firebaseClient";
 import Link from "next/link";
 import Head from "next/head";
 
+interface FirebaseAuthError extends Error {
+  code: string;
+}
+
 export default function SignUp() {
   const router = useRouter();
 
@@ -22,6 +26,27 @@ export default function SignUp() {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const [error, seterror] = useState("");
+
+  const getFirebaseErrorMessage = (code: string): string => {
+    switch (code) {
+      case "auth/invalid-email":
+        return "Please enter a valid email address.";
+      case "auth/email-already-in-use":
+        return "This email is already signed up to this app.";
+      case "auth/weak-password":
+        return "Password must be at least 6 characters.";
+      case "auth/missing-password":
+        return "Please enter your password.";
+      case "auth/network-request-failed":
+        return "Network error. Please check your internet connection.";
+      case "auth/popup-closed-by-user":
+        return "Open popup for sign up success.";
+      case "auth/cancelled-popup-request":
+        return "Popup signup was interrupted. Please try again.";
+      default:
+        return "Something went wrong. Please try again.";
+    }
+  };
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -40,11 +65,13 @@ export default function SignUp() {
         createdAt: new Date(),
       });
 
-      console.log("User saved, now redirecting...");
-      await router.push("/");
+      await router.push("/dashboard");
     } catch (err: unknown) {
-      if (err instanceof Error) {
-        seterror(err.message);
+      if (typeof err === "object" && err !== null && "code" in err) {
+        const firebaseError = err as FirebaseAuthError;
+        seterror(getFirebaseErrorMessage(firebaseError.code));
+      } else {
+        seterror("Something went wrong. Please try again.");
       }
     }
   };
@@ -67,11 +94,13 @@ export default function SignUp() {
         });
       }
 
-      router.push("/");
+      router.push("/dashboard");
     } catch (err: unknown) {
-      if (err instanceof Error) {
-        console.error("Google login error:", err.message);
-        seterror(err.message);
+      if (typeof err === "object" && err !== null && "code" in err) {
+        const firebaseError = err as FirebaseAuthError;
+        seterror(getFirebaseErrorMessage(firebaseError.code));
+      } else {
+        seterror("Something went wrong. Please try again.");
       }
     }
   };
@@ -94,10 +123,13 @@ export default function SignUp() {
         });
       }
 
-      router.push("/");
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        seterror(error.message);
+      router.push("/dashboard");
+    } catch (err: unknown) {
+      if (typeof err === "object" && err !== null && "code" in err) {
+        const firebaseError = err as FirebaseAuthError;
+        seterror(getFirebaseErrorMessage(firebaseError.code));
+      } else {
+        seterror("Something went wrong. Please try again.");
       }
     }
   };

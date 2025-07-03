@@ -17,12 +17,33 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import Link from "next/link";
 
+interface FirebaseAuthError extends Error {
+  code: string;
+}
+
 export default function LogIn() {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const [error, seterror] = useState("");
 
   const router = useRouter();
+
+  const getFirebaseErrorMessage = (code: string): string => {
+    switch (code) {
+      case "auth/invalid-email":
+        return "Please enter a valid email address.";
+      case "auth/user-not-found":
+        return "No account found with this email.";
+      case "auth/wrong-password":
+        return "Incorrect password. Try again.";
+      case "auth/too-many-request":
+        return "Too many failed attempts. Try again later.";
+      case "auth/popup-closed-by-user":
+        return "Enable/Open Popup for successfull sign in.";
+      default:
+        return "Something went wrong. Please try again.";
+    }
+  };
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,7 +52,10 @@ export default function LogIn() {
       router.push("/dashboard");
     } catch (err: unknown) {
       if (err instanceof Error) {
-        seterror(err.message);
+        const firebaseError = err as FirebaseAuthError;
+        seterror(getFirebaseErrorMessage(firebaseError.code));
+      } else {
+        seterror("Something went wrong. Please try again.");
       }
     }
   };
@@ -42,7 +66,10 @@ export default function LogIn() {
       router.push("/dashboard");
     } catch (err: unknown) {
       if (err instanceof Error) {
-        seterror(err.message);
+        const firebaseError = err as FirebaseAuthError;
+        seterror(getFirebaseErrorMessage(firebaseError.code));
+      } else {
+        seterror("Something went wrong. Please try again.");
       }
     }
   };
@@ -53,7 +80,10 @@ export default function LogIn() {
       router.push("/dashboard");
     } catch (err: unknown) {
       if (err instanceof Error) {
-        seterror(err.message);
+        const firebaseError = err as FirebaseAuthError;
+        seterror(getFirebaseErrorMessage(firebaseError.code));
+      } else {
+        seterror("Something went wrong. Please try again.");
       }
     }
   };
@@ -102,7 +132,11 @@ export default function LogIn() {
                 placeholder="**********"
               />
             </div>
-            {error && <p className="text-red-500 text-sm mt-3">{error}</p>}
+            {error && (
+              <div className="bg-red-200 border border-red-500 py-3 px-5">
+                <p className="text-red-500 text-sm mt-3">{error}</p>
+              </div>
+            )}
             <button
               type="submit"
               className="text-center font-semibold text-white bg-blue-500 p-3 rounded"
