@@ -8,7 +8,13 @@ import Link from "next/link";
 export default function LogIn() {
   return (
     <>
-      <Head>Hacklog | Sign In</Head>
+      <Head>
+        <title>Hacklog | Sign In</title>
+        <meta
+          name="description"
+          content="Sign in and continue to use ahcklog to stay productive and accountable."
+        />
+      </Head>
       <div className="flex flex-col justify-center items-center mt-[10%]  w-full">
         <div className="w-[40%]">
           <form action="" className="flex flex-col gap-5">
@@ -55,7 +61,7 @@ export default function LogIn() {
             </div>
             <button
               type="submit"
-              className="text-center font-semibold text-white bg-blue-300 p-3 rounded"
+              className="text-center font-semibold text-white bg-blue-500 p-3 rounded"
             >
               Sign In
             </button>

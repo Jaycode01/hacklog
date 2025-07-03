@@ -17,7 +17,7 @@ export default function Navbar() {
         <button
           type="button"
           onClick={() => router.push("/get-started")}
-          className="text-white bg-blue-300 px-7 py-3.5 text-[20px] rounded cursor-pointer flex flex-row items-center gap-1.5"
+          className="text-white bg-blue-500 px-7 py-3.5 text-[20px] rounded cursor-pointer flex flex-row items-center gap-1.5"
         >
           Get Started
           <ChevronRight />
