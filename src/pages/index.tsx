@@ -27,21 +27,21 @@ export default function Home() {
       <main className="h-[calc(100vh-145px)] flex flex-col bg-gradient-to-br from-gray-100 to-blue-200 pt-5">
         {" "}
         <div className="h- flex justify-center ">
-          <div className="w-[60%] mt-[5%]">
+          <div className="w-[85%] md:w-[60%] mt-[5%]">
             <h1
-              className={`text-[50px] w-full ${poppins.className} text-center`}
+              className={`text-[28px] md:text-[50px] w-full ${poppins.className} text-center`}
             >
               Track your progress. Build consistently. Build better habit today.
             </h1>
-            <p className=" text-[20px] w-full text-center px-[20%] mt-4">
+            <p className=" text-[20px] w-full text-center px-[5%] md:px-[20%] mt-4">
               Hacklog helps markers and developers stay on track with daily
               standups. Track your daily routines, stay consistent, and turn
               goals into habits — all in one beautiful app.
             </p>
-            <div className="flex flex-row justify-center items-center mt-5 gap-4">
+            <div className="flex flex-col md:flex-row justify-center items-center mt-5 gap-4">
               <button
                 type="button"
-                className="text-center bg-blue-500 px-10 py-5 text-white text-xl center rounded-full hover:bg-blue-400 hover:cursor-pointer"
+                className="text-center bg-blue-500 px-10 py-5 text-white text-lg md:text-xl center rounded-full hover:bg-blue-400 hover:cursor-pointer"
               >
                 Get Started Free
               </button>
@@ -55,7 +55,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="w-full flex flex-row justify-end">
+        <div className="w-full flex flex-row justify-end mt-10 md:mt-0">
           <Image
             src={OSImage}
             alt="os image for applictaion"
