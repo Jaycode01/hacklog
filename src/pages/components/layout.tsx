@@ -4,7 +4,9 @@ import Head from "next/head";
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <Head>Hacklog - Work with consistency</Head>
+      <Head>
+        <title>Hacklog - Work with consistency</title>
+      </Head>
       <Navbar />
       <main>{children}</main>
     </>

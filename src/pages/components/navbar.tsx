@@ -8,6 +8,7 @@ import { auth } from "@/firebase/firebaseClient";
 
 import Image from "next/image";
 import Logo from "../../../public/images/hacklog-logo.png";
+import Link from "next/link";
 
 export default function Navbar() {
   const [user, setuser] = useState<User | null>(null);
@@ -27,6 +28,11 @@ export default function Navbar() {
       <div className="" onClick={() => router.push("/")}>
         <Image src={Logo} alt="hacklog logo" width={100} height={100} />
       </div>
+      {user && (
+        <div className="">
+          <Link href="/dashboard">Dashboard</Link>
+        </div>
+      )}
       {user ? (
         <div className="">
           <button
