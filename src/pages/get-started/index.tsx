@@ -8,6 +8,9 @@ import { Mail, User } from "lucide-react";
 import { Password } from "phosphor-react";
 import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "@/firebase/firebaseClient";
+
 import Link from "next/link";
 import Head from "next/head";
 
@@ -22,7 +25,20 @@ export default function SignUp() {
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      const userData = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userData.user;
+
+      await setDoc(doc(db, "users", user.uid), {
+        uid: user.uid,
+        name,
+        email,
+        createdAt: new Date(),
+      });
+
       router.push("/");
     } catch (err: unknown) {
       if (err instanceof Error) {
