@@ -1,14 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { GoogleAuthProvider, GithubAuthProvider } from "firebase/auth";
 import { auth } from "@/firebase/firebaseClient";
 import { useRouter } from "next/router";
 import { Mail, User } from "lucide-react";
 import { Password } from "phosphor-react";
 import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 import { db } from "@/firebase/firebaseClient";
 
 import Link from "next/link";
@@ -39,10 +40,64 @@ export default function SignUp() {
         createdAt: new Date(),
       });
 
-      router.push("/");
+      console.log("User saved, now redirecting...");
+      await router.push("/");
     } catch (err: unknown) {
       if (err instanceof Error) {
         seterror(err.message);
+      }
+    }
+  };
+
+  const signInWithGoogle = async () => {
+    try {
+      const result = await signInWithPopup(auth, new GoogleAuthProvider());
+      const user = result.user;
+
+      const userRef = doc(db, "users", user.uid);
+      const userSnap = await getDoc(userRef);
+
+      if (!userSnap.exists()) {
+        await setDoc(userRef, {
+          uid: user.uid,
+          name: user.displayName,
+          email: user.email,
+          provider: "google",
+          createdAt: new Date(),
+        });
+      }
+
+      router.push("/");
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        console.error("Google login error:", err.message);
+        seterror(err.message);
+      }
+    }
+  };
+
+  const signInWithGitHub = async () => {
+    try {
+      const result = await signInWithPopup(auth, new GithubAuthProvider());
+      const user = result.user;
+
+      const userRef = doc(db, "users", user.uid);
+      const userSnap = await getDoc(userRef);
+
+      if (!userSnap.exists()) {
+        await setDoc(userRef, {
+          uid: user.uid,
+          name: user.displayName,
+          email: user.email,
+          provider: "github",
+          createdAt: new Date(),
+        });
+      }
+
+      router.push("/");
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        seterror(error.message);
       }
     }
   };
@@ -107,6 +162,7 @@ export default function SignUp() {
             <div className="w-full mt-6 flex flex-row justify-between gap-[5%]">
               <button
                 type="button"
+                onClick={signInWithGoogle}
                 className="w-[47.5%] p-3 rounded text-center border border-gray-600 flex justify-center items-center gap-1.5 bg-white hover:bg-gray-50"
               >
                 <FcGoogle />
@@ -114,6 +170,7 @@ export default function SignUp() {
               </button>
               <button
                 type="button"
+                onClick={signInWithGitHub}
                 className="w-[47.5%] items-center p-3 rounded text-center border border-gray-600 flex justify-center gap-1.5 bg-white hover:bg-gray-50"
               >
                 <FaGithub />
