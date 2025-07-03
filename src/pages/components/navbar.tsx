@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { ChevronRight, UserRound } from "lucide-react";
+import { ChevronRight, Menu, UserRound, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { onAuthStateChanged, signOut, User } from "firebase/auth";
 import { getDoc, doc } from "firebase/firestore";
@@ -15,6 +15,7 @@ export default function Navbar() {
   const [user, setuser] = useState<User | null>(null);
   const [dropdownOpen, setdropdownOpen] = useState(false);
   const [fullName, setfullName] = useState<string | null>(null);
+  const [openMenu, setopenMenu] = useState(false);
 
   const router = useRouter();
 
@@ -42,17 +43,39 @@ export default function Navbar() {
   };
 
   return (
-    <div className="bg-white shadow-lg flex flex-row justify-between items-center px-10 py-5">
+    <div className="relative bg-white shadow-lg flex flex-row justify-between items-center px-10 py-5">
       <div className="" onClick={() => router.push("/")}>
         <Image src={Logo} alt="hacklog logo" width={90} height={90} />
       </div>
       {user && (
-        <div className="">
-          <Link href="/dashboard">Dashboard</Link>
+        <div
+          className={`absolute md:relative left-0 top-[120px] w-full md:w-auto md:top-0 z-50 
+      flex-col md:flex-row items-center justify-center md:justify-start gap-10 font-semibold 
+      py-7 md:py-0 bg-white md:bg-inherit border-t md:border-none border-gray-200 md:flex
+      transition-all duration-1000 ease-in-out
+      ${
+        openMenu
+          ? "flex opacity-100 translate-y-0"
+          : "hidden md:flex opacity-0 -translate-y-full"
+      }`}
+        >
+          <Link
+            href="/dashboard"
+            className="text-[20px] text-gray-900 hover:text-blue-500 hover:border-b-2 border-blue-500"
+          >
+            Dashboard
+          </Link>
+          <Link
+            href="/history"
+            className="text-[20px] text-gray-900 hover:text-blue-500 hover:border-b-2 border-blue-500"
+          >
+            History
+          </Link>
         </div>
       )}
+
       {user ? (
-        <div className="">
+        <div className="flex items-center flex-row gap-7">
           <div className="relative">
             <button
               type="button"
@@ -87,6 +110,14 @@ export default function Navbar() {
               </div>
             )}
           </div>
+          <button
+            type="button"
+            className="text-gray-600 flex md:hidden cursor-pointer"
+            onClick={() => setopenMenu((prev) => !prev)}
+          >
+            {" "}
+            {openMenu ? <X /> : <Menu />}
+          </button>
         </div>
       ) : (
         <button

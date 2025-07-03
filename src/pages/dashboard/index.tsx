@@ -1,3 +1,10 @@
+import Head from "next/head";
+
 export default function Dashboard() {
-  return <div>Dashboard Page</div>;
+  return (
+    <>
+      <Head>Hacklog | Dashboard</Head>
+      <div>Dashboard Page</div>
+    </>
+  );
 }

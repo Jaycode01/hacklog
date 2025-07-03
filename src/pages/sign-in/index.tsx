@@ -67,8 +67,8 @@ export default function LogIn() {
           content="Sign in and continue to use ahcklog to stay productive and accountable."
         />
       </Head>
-      <div className="flex flex-col justify-center items-center mt-[10%]  w-full">
-        <div className="w-[40%]">
+      <div className="flex flex-col justify-center items-center h-[calc(100vh-180px)] mt-[10%]  w-full">
+        <div className="w-[90%] md:w-[40%]">
           <form
             action=""
             onSubmit={handleLogin}
