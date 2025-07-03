@@ -1,3 +1,9 @@
+"use client";
+
+import { useState } from "react";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "@/firebase/firebaseClient";
+import { useRouter } from "next/router";
 import { Mail, User } from "lucide-react";
 import { Password } from "phosphor-react";
 import { FaGithub } from "react-icons/fa";
@@ -6,20 +12,50 @@ import Link from "next/link";
 import Head from "next/head";
 
 export default function SignUp() {
+  const router = useRouter();
+
+  const [name, setname] = useState("");
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
+  const [error, seterror] = useState("");
+
+  const handleSignUp = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      router.push("/");
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        seterror(err.message);
+      }
+    }
+  };
+
   return (
     <>
       <Head>
         <title>Hacklog | Join Hacklog</title>
       </Head>
-      <div className="flex flex-col justify-center items-center h-100vh">
-        <div className="w-[80%] md:w-[40%] mt-[10%]">
-          <form action="" className="flex flex-col gap-5">
+      <div className="relative flex flex-col justify-center items-center h-[calc(100vh-180px)]">
+        <div className="absolute z-50 bottom-0 right-0 rounded-md  bg-red-200 mr-[10px] border border-red-500 py-3 px-5">
+          {error && (
+            <p className="text-red-500 text-sm font-semibold">{error}</p>
+          )}
+        </div>
+        <div className="w-[80%] md:w-[40%] mt-[5%]">
+          <form
+            action=""
+            className="flex flex-col gap-5"
+            onSubmit={handleSignUp}
+          >
             <div className="flex flex-row gap-3 border border-gray-600 p-3 rounded">
               <label htmlFor="name" className="text-gray-600">
                 <User />
               </label>
               <input
                 type="text"
+                value={name}
+                onChange={(e) => setname(e.target.value)}
                 className="outline-none text-inherit w-full"
                 placeholder="Tom Keen"
               />
@@ -32,6 +68,8 @@ export default function SignUp() {
                 type="email"
                 name="email"
                 id="email"
+                value={email}
+                onChange={(e) => setemail(e.target.value)}
                 className="outline-none w-full text-inherit"
                 placeholder="tom.keen@dev.com"
               />
@@ -44,6 +82,8 @@ export default function SignUp() {
                 type="password"
                 name="password"
                 id="password"
+                value={password}
+                onChange={(e) => setpassword(e.target.value)}
                 className="outline-none text-inherit w-full"
                 placeholder="*********"
               />
