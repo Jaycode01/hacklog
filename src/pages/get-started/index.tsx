@@ -108,11 +108,11 @@ export default function SignUp() {
         <title>Hacklog | Join Hacklog</title>
       </Head>
       <div className="relative flex flex-col justify-center items-center h-[calc(100vh-180px)]">
-        <div className="absolute z-50 bottom-0 right-0 rounded-md  bg-red-200 mr-[10px] border border-red-500 py-3 px-5">
-          {error && (
+        {error && (
+          <div className="absolute z-50 bottom-0 right-0 rounded-md  bg-red-200 mr-[10px] border border-red-500 py-3 px-5">
             <p className="text-red-500 text-sm font-semibold">{error}</p>
-          )}
-        </div>
+          </div>
+        )}
         <div className="w-[80%] md:w-[40%] mt-[5%]">
           <form
             action=""
