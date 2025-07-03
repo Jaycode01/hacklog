@@ -1,40 +1,32 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+## Hacklog
 
-## Getting Started
+<b>Hacklog is a minimalist web app that helps makers, students, and developers log and track their daily progress by answering three simple standup questions. It is built for builders who want to stay accountable, reflect regularly, and ship consistently. <br/> The three simple questions are:</b>
 
-First, run the development server:
+- ✔ What did you do yesterday ?
+- 🎯 What will you do today ?
+- 🧱 Are there any blockers ?
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+<p>Wanna check it out? <a href="https://hacklog.vercel.app">Try out here...</a></p>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+A quick index preview:
+<img src="./public/Screenshot (182).png">
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+### Tech Stack 👩🏾‍💻
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+#### Frontend
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+- Next.js
+- TailwindCSS
+- Lucide Icons
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+#### Backend(Auth)
 
-## Learn More
+- Firebase
 
-To learn more about Next.js, take a look at the following resources:
+#### Database
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+- Firestore
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+<em>stay tuned...</em>
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+<p>Made by <a href="mailto:josephlamidijoslam@gmail.com">Nexon</a> with ❤</p>
