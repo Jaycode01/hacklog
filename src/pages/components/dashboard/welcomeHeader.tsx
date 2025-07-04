@@ -43,7 +43,7 @@ export default function WelcomeHeader() {
   const currentDate = formatDate();
 
   return (
-    <div className="px-5 py-3 flex flex-row justify-between items-center">
+    <div className="px-5 py-6 flex flex-row justify-between items-center border">
       <h1 className="flex flex-row items-center text-[25px] gap-1.5">
         {firstName ? `Welcome back, ${firstName}` : "Welcome"}{" "}
         <HandWaving size={30} />
