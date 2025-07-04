@@ -50,14 +50,10 @@ export default function Navbar() {
       {user && (
         <div
           className={`absolute md:relative left-0 top-[120px] w-full md:w-auto md:top-0 z-50 
-      flex-col md:flex-row items-center justify-center md:justify-start gap-10 font-semibold 
-      py-7 md:py-0 bg-white md:bg-inherit border-t md:border-none border-gray-200 md:flex
-      transition-all duration-1000 ease-in-out
-      ${
-        openMenu
-          ? "flex opacity-100 translate-y-0"
-          : "hidden md:flex opacity-0 -translate-y-full"
-      }`}
+          flex-col md:flex-row items-center justify-center md:justify-start gap-10 font-semibold 
+          py-7 md:py-0 bg-white md:bg-inherit border-t md:border-none border-gray-200 
+          transition-all duration-300 ease-in-out
+          ${openMenu ? "flex" : "hidden"} md:flex`}
         >
           <Link
             href="/dashboard"
