@@ -1,7 +1,25 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import { FireSimple } from "phosphor-react";
 import Styles from "../styles/dailyStandup.module.css";
 
-export default function welcomeHeader() {
+export default function StandupTop() {
+  const [currentDate, setcurrentDate] = useState("");
+
+  useEffect(() => {
+    const getTodayDate = () => {
+      const today = new Date();
+      const day = String(today.getDate()).padStart(2, "0");
+      const month = String(today.getMonth() + 1).padStart(2, "0");
+      const year = today.getFullYear();
+
+      return `${day}/${month}/${year}`;
+    };
+
+    setcurrentDate(getTodayDate());
+  }, []);
+
   return (
     <div>
       <p className="text-[16px] md:text-[18px] px-5 md:px-10 pt-5 italic font-semibold">
@@ -11,7 +29,7 @@ export default function welcomeHeader() {
         <h1
           className={`${Styles.pageHeader} text-[20px] md:text-[25px] font-semibold`}
         >
-          Daily Standup - 05/07/2025
+          Daily Standup - {currentDate}
         </h1>
         <div className="flex items-center gap-5">
           <p className="border rounded border-gray-600 py-2.5 px-5 text-lg">
