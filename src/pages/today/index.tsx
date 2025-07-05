@@ -1,5 +1,5 @@
 import Head from "next/head";
-import WelcomeHeader from "../components/dashboard/welcomeHeader";
+import StandupTop from "../components/dashboard/standupTop";
 import StandupForm from "../components/dashboard/standupForm";
 
 export default function Dashboard() {
@@ -8,7 +8,7 @@ export default function Dashboard() {
       <Head>Hacklog | Dashboard</Head>
       <div>
         <div className="bg-gray-50">
-          <WelcomeHeader />
+          <StandupTop />
           <StandupForm />
         </div>
       </div>
