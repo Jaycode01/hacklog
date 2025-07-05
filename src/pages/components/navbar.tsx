@@ -49,7 +49,7 @@ export default function Navbar() {
       </div>
       {user && (
         <div
-          className={`absolute md:relative left-0 top-[120px] w-full md:w-auto md:top-0 z-50 
+          className={`absolute md:relative left-0 top-[110px] w-full md:w-auto md:top-0 z-50 
           flex-col md:flex-row items-center justify-center md:justify-start gap-14 
           py-7 md:py-0 bg-white md:bg-inherit border-t md:border-none border-gray-200 
           transition-all duration-300 ease-in-out

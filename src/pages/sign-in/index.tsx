@@ -49,7 +49,7 @@ export default function LogIn() {
     e.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      router.push("/dashboard");
+      router.push("/today");
     } catch (err: unknown) {
       if (err instanceof Error) {
         const firebaseError = err as FirebaseAuthError;
@@ -63,7 +63,7 @@ export default function LogIn() {
   const loginWithGoogle = async () => {
     try {
       await signInWithPopup(auth, new GoogleAuthProvider());
-      router.push("/dashboard");
+      router.push("/today");
     } catch (err: unknown) {
       if (err instanceof Error) {
         const firebaseError = err as FirebaseAuthError;
@@ -77,7 +77,7 @@ export default function LogIn() {
   const loginWithGithub = async () => {
     try {
       await signInWithPopup(auth, new GithubAuthProvider());
-      router.push("/dashboard");
+      router.push("/today");
     } catch (err: unknown) {
       if (err instanceof Error) {
         const firebaseError = err as FirebaseAuthError;

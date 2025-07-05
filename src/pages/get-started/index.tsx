@@ -65,7 +65,7 @@ export default function SignUp() {
         createdAt: new Date(),
       });
 
-      await router.push("/dashboard");
+      await router.push("/today");
     } catch (err: unknown) {
       if (typeof err === "object" && err !== null && "code" in err) {
         const firebaseError = err as FirebaseAuthError;
@@ -94,7 +94,7 @@ export default function SignUp() {
         });
       }
 
-      router.push("/dashboard");
+      router.push("/today");
     } catch (err: unknown) {
       if (typeof err === "object" && err !== null && "code" in err) {
         const firebaseError = err as FirebaseAuthError;
@@ -123,7 +123,7 @@ export default function SignUp() {
         });
       }
 
-      router.push("/dashboard");
+      router.push("/today");
     } catch (err: unknown) {
       if (typeof err === "object" && err !== null && "code" in err) {
         const firebaseError = err as FirebaseAuthError;

@@ -1,6 +1,6 @@
 import Head from "next/head";
 import WelcomeHeader from "../components/dashboard/welcomeHeader";
-import StatusCards from "../components/dashboard/statusCards";
+import StandupForm from "../components/dashboard/standupForm";
 
 export default function Dashboard() {
   return (
@@ -9,7 +9,7 @@ export default function Dashboard() {
       <div>
         <div className="bg-gray-50">
           <WelcomeHeader />
-          <StatusCards />
+          <StandupForm />
         </div>
       </div>
     </>
