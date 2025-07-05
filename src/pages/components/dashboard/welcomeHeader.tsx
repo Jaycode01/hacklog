@@ -1,58 +1,22 @@
-"use client";
+import { FireSimple } from "phosphor-react";
+import Styles from "../styles/dailyStandup.module.css";
 
-import { useEffect, useState } from "react";
-import { onAuthStateChanged, User } from "firebase/auth";
-import { auth, db } from "@/firebase/firebaseClient";
-import { getDoc, doc } from "firebase/firestore";
-import { Calendar, HandWaving } from "phosphor-react";
-
-export default function WelcomeHeader() {
-  const [firstName, setfirstName] = useState<string>("");
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (user: User | null) => {
-      if (user) {
-        const userRef = doc(db, "users", user.uid);
-        const docSnap = await getDoc(userRef);
-        if (docSnap.exists()) {
-          const fullName = docSnap.data().name || "";
-          const first = fullName.trim().split(" ")[0];
-          setfirstName(first);
-        }
-      }
-    });
-
-    return () => unsubscribe();
-  });
-
-  const formatDate = () => {
-    const today = new Date();
-
-    const options: Intl.DateTimeFormatOptions = {
-      weekday: "long",
-    };
-
-    const weekday = today.toLocaleDateString("en-US", options);
-    const day = String(today.getDate()).padStart(2, "0");
-    const month = String(today.getDate() + 1).padStart(2, "0");
-    const year = String(today.getFullYear()).slice(-2);
-
-    return `${weekday}: ${month} | ${day} | ${year}`;
-  };
-
-  const currentDate = formatDate();
-
+export default function welcomeHeader() {
   return (
-    <div className="px-5 py-6 flex flex-row justify-between items-center border">
-      <h1 className="flex flex-row items-center text-[25px] gap-1.5">
-        {firstName ? `Welcome back, ${firstName}` : "Welcome"}{" "}
-        <HandWaving size={30} />
-      </h1>
-      <div className="">
-        <p className="text-gray-500 text-[17px] flex items-center gap-1.5">
-          <Calendar size={25} /> {currentDate}
-        </p>
+    <div>
+      <div className="flex flex-row w-full justify-between px-10 py-7 items-center">
+        <h1 className={`${Styles.pageHeader} text-[25px] font-semibold`}>
+          Daily Standup - 05/07/2025
+        </h1>
+        <button
+          type="button"
+          className="flex items-center gap-1.5 bg-red-200 py-2.5 px-5 border-red-500 border rounded-lg"
+        >
+          <FireSimple size={20} className="text-red-500" />
+          <span className="text-[20px] txt-gray-900 font-semibold">21</span>
+        </button>
       </div>
+      <div className=""></div>
     </div>
   );
 }

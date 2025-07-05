@@ -1,0 +1,8 @@
+@font-face {
+  font-family: "Poppins";
+  src: url("../../../../public/fonts/Poppins.woff2"), format("woff2");
+}
+
+.pageHeader {
+  font-family: "Poppins";
+}
