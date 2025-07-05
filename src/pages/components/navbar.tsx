@@ -45,27 +45,39 @@ export default function Navbar() {
   return (
     <div className="relative bg-white shadow-lg flex flex-row justify-between items-center px-10 py-5">
       <div className="" onClick={() => router.push("/")}>
-        <Image src={Logo} alt="hacklog logo" width={90} height={90} />
+        <Image src={Logo} alt="hacklog logo" width={70} height={70} />
       </div>
       {user && (
         <div
           className={`absolute md:relative left-0 top-[120px] w-full md:w-auto md:top-0 z-50 
-          flex-col md:flex-row items-center justify-center md:justify-start gap-10 font-semibold 
+          flex-col md:flex-row items-center justify-center md:justify-start gap-14 
           py-7 md:py-0 bg-white md:bg-inherit border-t md:border-none border-gray-200 
           transition-all duration-300 ease-in-out
           ${openMenu ? "flex" : "hidden"} md:flex`}
         >
           <Link
-            href="/dashboard"
-            className="text-[20px] text-gray-900 hover:text-blue-500 hover:border-b-2 border-blue-500"
+            href="/today"
+            className="text-[18px] text-gray-900 hover:text-green-600 hover:border-b-2 border-green-600"
           >
-            Dashboard
+            Today
           </Link>
           <Link
             href="/history"
-            className="text-[20px] text-gray-900 hover:text-blue-500 hover:border-b-2 border-blue-500"
+            className="text-[18px] text-gray-900 hover:text-green-600 hover:border-b-2 border-green-600"
           >
             History
+          </Link>
+          <Link
+            href="/goals"
+            className="text-[18px] text-gray-900 hover:text-green-600 hover:border-b-2 border-greem-600"
+          >
+            Goals
+          </Link>
+          <Link
+            href="/analytics"
+            className="text-[18px] text-gray-900 hover:text-green-600 hover:border-b-2 border-green-600"
+          >
+            Analytics
           </Link>
         </div>
       )}
@@ -90,7 +102,7 @@ export default function Navbar() {
                   <button type="button" className="text-left cursor-pointer">
                     Mode
                   </button>{" "}
-                  <button className="hover:text-blue-500 text-left cursor-pointer">
+                  <button className="hover:text-green-600 text-left cursor-pointer">
                     View profile
                   </button>
                   <button
@@ -119,7 +131,7 @@ export default function Navbar() {
         <button
           type="button"
           onClick={() => router.push("/get-started")}
-          className="text-white bg-blue-500 px-7 py-3.5 text-[20px] rounded cursor-pointer flex flex-row items-center gap-1.5"
+          className="text-white bg-green-600 px-7 py-3.5 text-[20px] rounded cursor-pointer flex flex-row items-center gap-1.5"
         >
           Get Started
           <ChevronRight />

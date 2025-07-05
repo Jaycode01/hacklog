@@ -97,7 +97,7 @@ export default function LogIn() {
           content="Sign in and continue to use ahcklog to stay productive and accountable."
         />
       </Head>
-      <div className="flex flex-col justify-center items-center h-[calc(100vh-180px)] mt-[10%]  w-full">
+      <div className="flex flex-col justify-center items-center h-[calc(100vh-180px)]  w-full">
         <div className="w-[90%] md:w-[40%]">
           <form
             action=""
@@ -139,7 +139,7 @@ export default function LogIn() {
             )}
             <button
               type="submit"
-              className="text-center font-semibold text-white bg-blue-500 p-3 rounded"
+              className="text-center font-semibold text-white bg-green-500 p-3 rounded"
             >
               Sign In
             </button>
