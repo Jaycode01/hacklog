@@ -9,8 +9,8 @@ export default function TopComponent() {
 
   return (
     <div>
-      <div className="flex flex-row justify-end px-7 pt-5 gap-5">
-        <div className="flex flex-row items-center gap-2 w-[30%] border border-gray-600 p-3.5 rounded">
+      <div className="flex flex-row justify-end px-5 md:px-10 pt-5 gap-5">
+        <div className="flex flex-row items-center gap-2 w-[60%] md:w-[30%] border border-gray-600 p-3.5 rounded">
           <label htmlFor="search-history">
             <MagnifyingGlass size={25} />
           </label>
