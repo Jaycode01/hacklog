@@ -100,6 +100,8 @@ export default function StandupForm() {
       });
 
       setSubmittedToday(true);
+      alert("Today's standup submitted successful.");
+      window.location.reload();
 
       // Reset form
       setYesterday("");
