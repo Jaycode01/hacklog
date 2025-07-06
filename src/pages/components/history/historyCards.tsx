@@ -14,7 +14,13 @@ interface Standup {
   blockers: string;
 }
 
-export default function HistoryCards({ searchQuery }: { searchQuery: string }) {
+export default function HistoryCards({
+  searchQuery,
+  filterOption,
+}: {
+  searchQuery: string;
+  filterOption: string;
+}) {
   const [userId, setUserId] = useState<string | null>(null);
   const [standups, setStandups] = useState<Standup[]>([]);
   const [loading, setLoading] = useState(true);
@@ -54,8 +60,37 @@ export default function HistoryCards({ searchQuery }: { searchQuery: string }) {
     return () => unsubscribe();
   }, []);
 
-  const filtered = standups.filter((log) =>
-    log.yesterday.toLowerCase().includes(searchQuery.toLowerCase())
+  const isWithinFilter = (dateStr: string): boolean => {
+    const logDate = new Date(dateStr);
+    const today = new Date();
+
+    switch (filterOption) {
+      case "This Week":
+        const startOfWeek = new Date(today);
+        startOfWeek.setDate(today.getDate() - today.getDay());
+        return logDate >= startOfWeek;
+      case "Last Week":
+        const startLastWeek = new Date(today);
+        startLastWeek.setDate(today.getDate() - today.getDay() - 7);
+        const endLastWeek = new Date(startLastWeek);
+        endLastWeek.setDate(startLastWeek.getDate() + 6);
+        return logDate >= startLastWeek && logDate <= endLastWeek;
+      case "This Month":
+        return (
+          logDate.getMonth() === today.getMonth() &&
+          logDate.getFullYear() === today.getFullYear()
+        );
+      case "This Year":
+        return logDate.getFullYear() === today.getFullYear();
+      default:
+        return true;
+    }
+  };
+
+  const filtered = standups.filter(
+    (log) =>
+      log.yesterday.toLowerCase().includes(searchQuery.toLowerCase()) &&
+      isWithinFilter(log.date)
   );
 
   if (loading) {

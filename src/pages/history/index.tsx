@@ -5,6 +5,7 @@ import HistoryCards from "../components/history/historyCards";
 
 export default function History() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [filterOption, setfilterOption] = useState("All");
 
   return (
     <>
@@ -15,8 +16,9 @@ export default function History() {
         <TopComponent
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
+          onFilterChange={setfilterOption}
         />
-        <HistoryCards searchQuery={searchQuery} />
+        <HistoryCards searchQuery={searchQuery} filterOption={filterOption} />
       </div>
     </>
   );
