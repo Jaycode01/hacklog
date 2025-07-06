@@ -1,10 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { MagnifyingGlass } from "phosphor-react";
 
-export default function TopComponent() {
+interface Props {
+  searchQuery: string;
+  setSearchQuery: Dispatch<SetStateAction<string>>;
+}
+
+export default function TopComponent({ searchQuery, setSearchQuery }: Props) {
   const [openFIlterOne, setopenFIlterOne] = useState(false);
 
   return (
@@ -17,6 +22,8 @@ export default function TopComponent() {
           <input
             type="search"
             id="search-history"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full text-inherit outline-none"
           />
         </div>

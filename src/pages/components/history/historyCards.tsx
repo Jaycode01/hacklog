@@ -14,10 +14,10 @@ interface Standup {
   blockers: string;
 }
 
-export default function HistoryCards() {
-  const [userId, setuserId] = useState<string | null>(null);
-  const [standups, setstandups] = useState<Standup[]>([]);
-  const [loading, setloading] = useState(true);
+export default function HistoryCards({ searchQuery }: { searchQuery: string }) {
+  const [userId, setUserId] = useState<string | null>(null);
+  const [standups, setStandups] = useState<Standup[]>([]);
+  const [loading, setLoading] = useState(true);
   const [expandedIds, setExpandedIds] = useState<string[]>([]);
 
   console.log(userId);
@@ -25,7 +25,7 @@ export default function HistoryCards() {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
-        setuserId(user.uid);
+        setUserId(user.uid);
 
         const q = query(
           collection(db, "standups"),
@@ -46,25 +46,29 @@ export default function HistoryCards() {
           });
         });
 
-        setstandups(logs);
-        setloading(false);
+        setStandups(logs);
+        setLoading(false);
       }
     });
 
     return () => unsubscribe();
   }, []);
 
+  const filtered = standups.filter((log) =>
+    log.yesterday.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   if (loading) {
     return <div className="p-10 text-lg">Loading histories...</div>;
   }
 
-  if (!standups.length) {
-    return <div className="p-10 text-lg">No standups logged yet.</div>;
+  if (!filtered.length) {
+    return <div className="p-10 text-lg">No standups matched your search.</div>;
   }
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 p-5 md:p-10">
-      {standups.map((log) => {
+      {filtered.map((log) => {
         const isExpanded = expandedIds.includes(log.id);
 
         const toggleExpanded = () => {
