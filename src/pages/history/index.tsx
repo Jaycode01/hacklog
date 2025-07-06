@@ -1,10 +1,15 @@
 import Head from "next/head";
+import TopComponent from "../components/history/topComponent";
 
 export default function History() {
   return (
     <>
-      <Head>Hacklog | History</Head>
-      <div>History</div>
+      <Head>
+        <title>Hacklog | History</title>
+      </Head>
+      <div className="bg-gray-50">
+        <TopComponent />
+      </div>
     </>
   );
 }
