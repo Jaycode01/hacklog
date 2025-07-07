@@ -67,18 +67,6 @@ export default function Navbar() {
           >
             History
           </Link>
-          <Link
-            href="/goals"
-            className="text-[18px] text-gray-900 hover:text-green-600 hover:border-b-2 border-greem-600"
-          >
-            Goals
-          </Link>
-          <Link
-            href="/analytics"
-            className="text-[18px] text-gray-900 hover:text-green-600 hover:border-b-2 border-green-600"
-          >
-            Analytics
-          </Link>
         </div>
       )}
 
@@ -99,12 +87,6 @@ export default function Navbar() {
             {dropdownOpen && (
               <div className="bg-white border border-gray-300 w-[150px] shadow-md absolute top-[60px] right-0 h-fit p-3 rounded">
                 <ul className="flex flex-col gap-1.5">
-                  <button type="button" className="text-left cursor-pointer">
-                    Mode
-                  </button>{" "}
-                  <button className="hover:text-green-600 text-left cursor-pointer">
-                    View profile
-                  </button>
                   <button
                     onClick={() => {
                       signOut(auth);

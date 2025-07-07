@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import { Play } from "lucide-react";
 import Image from "next/image";
 import OSImage from "../../public/OS-mobile.svg";
+import { useRouter } from "next/router";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -10,6 +11,8 @@ const poppins = Poppins({
 });
 
 export default function Home() {
+  const router = useRouter();
+
   return (
     <>
       <Head>
@@ -41,6 +44,7 @@ export default function Home() {
             <div className="flex flex-col md:flex-row justify-center items-center mt-5 gap-4">
               <button
                 type="button"
+                onClick={() => router.push("/get-started")}
                 className="text-center bg-green-600 px-10 py-5 text-white text-md center rounded-full hover:bg-green-500 border-green-600 border hover:cursor-pointer"
               >
                 Get Started Free
